@@ -1,9 +1,5 @@
 import { trpc } from '@/utils/trpc'
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect } from 'react'
-import styles from '../styles/Home.module.css'
 import { useTheme } from 'next-themes'
 const Home: NextPage = () => {
    const { data, isLoading } = trpc.useQuery(['getAllPosts'])

@@ -1,9 +1,9 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
 import { withTRPC } from '@trpc/next'
-import { AppRouter } from './api/trpc/[trpc]'
-import superjson from 'superjson'
 import { ThemeProvider } from 'next-themes'
+import type { AppProps } from 'next/app'
+import superjson from 'superjson'
+import '../styles/globals.css'
+import { AppRouter } from './api/trpc/[trpc]'
 function MyApp({ Component, pageProps }: AppProps) {
    return (
       <ThemeProvider>
