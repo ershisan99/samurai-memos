@@ -2,9 +2,14 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { withTRPC } from '@trpc/next'
 import { AppRouter } from './api/trpc/[trpc]'
-
+import superjson from 'superjson'
+import { ThemeProvider } from 'next-themes'
 function MyApp({ Component, pageProps }: AppProps) {
-   return <Component {...pageProps} />
+   return (
+      <ThemeProvider>
+         <Component {...pageProps} />
+      </ThemeProvider>
+   )
 }
 
 export default withTRPC<AppRouter>({
@@ -19,6 +24,7 @@ export default withTRPC<AppRouter>({
 
       return {
          url,
+         transformer: superjson,
          /**
           * @link https://react-query.tanstack.com/reference/QueryClient
           */

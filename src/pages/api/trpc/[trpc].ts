@@ -1,19 +1,18 @@
+import { PrismaClient } from '@prisma/client'
 import * as trpc from '@trpc/server'
 import * as trpcNext from '@trpc/server/adapters/next'
+import { resolve } from 'path'
+import superjson from 'superjson'
 import { z } from 'zod'
-
-export const appRouter = trpc.router().query('hello', {
-   input: z
-      .object({
-         text: z.string().nullish(),
-      })
-      .nullish(),
-   resolve({ input }) {
-      return {
-         greeting: `hello ${input?.text ?? 'world'}`,
-      }
-   },
-})
+const prisma = new PrismaClient()
+export const appRouter = trpc
+   .router()
+   .transformer(superjson)
+   .query('getAllPosts', {
+      async resolve() {
+         return await prisma.post.findMany()
+      },
+   })
 
 // export type definition of API
 export type AppRouter = typeof appRouter
