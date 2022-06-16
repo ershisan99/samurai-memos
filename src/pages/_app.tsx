@@ -1,3 +1,4 @@
+import Layout from '@/components/Layout'
 import { withTRPC } from '@trpc/next'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
@@ -7,7 +8,9 @@ import { AppRouter } from './api/trpc/[trpc]'
 function MyApp({ Component, pageProps }: AppProps) {
    return (
       <ThemeProvider>
-         <Component {...pageProps} />
+         <Layout>
+            <Component {...pageProps} />
+         </Layout>
       </ThemeProvider>
    )
 }

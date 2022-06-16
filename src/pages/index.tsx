@@ -4,29 +4,24 @@ import { useTheme } from 'next-themes'
 const Home: NextPage = () => {
    const { data, isLoading } = trpc.useQuery(['getAllPosts'])
    const { setTheme } = useTheme()
-   if (isLoading) return <p>Loading...</p>
+   if (isLoading || !data) return <p>Loading...</p>
 
-   if (data)
-      return (
-         <div className="flex justify-center ali">
-            {data.map((post) => {
-               return (
-                  <div
-                     key={post.id}
-                     className="card bg-primary text-primary-content w-96"
-                  >
-                     <div className="card-body">
-                        <h1 className="card-title">{post.title}</h1>
-                        <p>{post.content}</p>
-                     </div>
-                  </div>
-               )
-            })}
+   return (
+      <div>
+         {data.map((post) => {
+            return (
+               <div key={post.id} className="p-10">
+                  <h1 className="card-title">{post.title}</h1>
+                  <p>{post.content}</p>
+               </div>
+            )
+         })}
+         <div>
             <button onClick={() => setTheme('night')}>Light Mode</button>
             <button onClick={() => setTheme('dark')}>Dark Mode</button>
          </div>
-      )
-   return <div className="text-center">{}</div>
+      </div>
+   )
 }
 
 export default Home
