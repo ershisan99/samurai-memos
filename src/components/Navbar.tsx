@@ -10,10 +10,7 @@ const ThemeItem = ({ name }: { name: string }) => {
          }`}
       >
          <div
-            onClick={() => {
-               console.log(name)
-               setTheme(name)
-            }}
+            onClick={() => setTheme(name)}
             data-theme={name}
             className="bg-base-100 text-base-content w-full cursor-pointer font-sans"
          >
@@ -202,7 +199,4 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
          </div>
       </div>
    )
-}
-function setTheme(arg0: string): void {
-   throw new Error('Function not implemented.')
 }
