@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
@@ -9,16 +6,59 @@ generator client {
 datasource db {
   provider             = "mysql"
   url                  = env("DATABASE_URL")
+  shadowDatabaseUrl    = env("SHADOW_DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
+model Account {
+  id                       String  @id @default(cuid())
+  userId                   String
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String? @db.Text
+  refresh_token_expires_in Int?
+  access_token             String? @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String? @db.Text
+  session_state            String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  name      String?
-  role      Role      @default(USER)
-  posts     Post[]
-  createdAt DateTime? @default(now())
+  id            String     @id @default(cuid())
+  email         String     @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  name          String?
+  role          Role       @default(USER)
+  posts         Post[]
+  createdAt     DateTime?  @default(now())
+  likes         Like[]
+  favorites     Favorite[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model Post {
@@ -29,8 +69,28 @@ model Post {
   content    String     @db.LongText
   published  Boolean    @default(false)
   author     User       @relation(fields: [authorId], references: [id])
-  authorId   Int
+  authorId   String
   categories Category[] @relation(references: [id])
+  status     Status     @default(DRAFT)
+  slug       String     @unique
+  likes      Like[]
+  favorites  Favorite[]
+}
+
+model Like {
+  userId String
+  id     String @id @default(cuid())
+  postId Int?
+  Post   Post?  @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Favorite {
+  userId String
+  id     String @id @default(cuid())
+  postId Int?
+  Post   Post?  @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Category {
@@ -42,4 +102,12 @@ model Category {
 enum Role {
   USER
   ADMIN
+}
+
+enum Status {
+  DRAFT
+  PUBLISHED
+  SUGGESTED
+  ACCEPTED
+  REJECTED
 }

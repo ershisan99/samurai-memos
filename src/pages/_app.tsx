@@ -1,17 +1,20 @@
 import Layout from '@/components/Layout'
 import { withTRPC } from '@trpc/next'
+import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import superjson from 'superjson'
 import '../styles/globals.css'
 import { AppRouter } from './api/trpc/[trpc]'
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
    return (
-      <ThemeProvider>
-         <Layout>
-            <Component {...pageProps} />
-         </Layout>
-      </ThemeProvider>
+      <SessionProvider session={session}>
+         <ThemeProvider>
+            <Layout>
+               <Component {...pageProps} />
+            </Layout>
+         </ThemeProvider>
+      </SessionProvider>
    )
 }
 

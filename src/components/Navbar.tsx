@@ -1,8 +1,13 @@
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
+import Image from 'next/image'
 import { ReactNode } from 'react'
+import { CgProfile } from 'react-icons/cg'
+import Loader from './loader/Loader'
 
 const ThemeItem = ({ name }: { name: string }) => {
    const { theme, setTheme } = useTheme()
+
    return (
       <div
          className={`outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2 ${
@@ -105,6 +110,7 @@ const SelectTheme = () => {
 }
 
 export const Navbar = ({ children }: { children: ReactNode }) => {
+   const { data: session, status } = useSession()
    type Cart = {
       [userId: string]: Array<{ itemId: string }>
    }
@@ -114,7 +120,11 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
       userCart.push({ itemId })
       cart[userId] = userCart
    }
-
+   const isLoading = status === 'loading'
+   const isAuth = status === 'authenticated'
+   const handleSigninOut = () => {
+      !isLoading && isAuth ? signOut() : signIn()
+   }
    return (
       <div className="drawer drawer-mobile bg-base-100">
          <input id="drawer" type="checkbox" className="drawer-toggle" />
@@ -154,12 +164,20 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
                   </div>
                   <SelectTheme />
                   <div className="dropdown dropdown-end">
-                     <label
-                        tabIndex={0}
-                        className="btn btn-ghost btn-circle avatar"
-                     >
+                     <label tabIndex={0} className="btn btn-ghost btn-circle">
                         <div className="w-10 rounded-full">
-                           <img src="https://api.lorem.space/image/face?hash=33791" />
+                           {isLoading ? (
+                              <Loader />
+                           ) : session?.user?.image ? (
+                              <Image
+                                 className="w-10 rounded-full avatar"
+                                 src={session.user.image}
+                                 alt="profile"
+                                 layout="fill"
+                              />
+                           ) : (
+                              <CgProfile className="w-10" size="2rem" />
+                           )}
                         </div>
                      </label>
                      <ul
@@ -176,7 +194,9 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
                            <a>Settings</a>
                         </li>
                         <li>
-                           <a>Logout</a>
+                           <button onClick={handleSigninOut}>
+                              {session?.user ? 'Logout' : 'Sign In'}
+                           </button>
                         </li>
                      </ul>
                   </div>
