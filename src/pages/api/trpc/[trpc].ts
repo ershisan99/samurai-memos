@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import * as trpc from '@trpc/server'
 import * as trpcNext from '@trpc/server/adapters/next'
-import { resolve } from 'path'
 import superjson from 'superjson'
-import { z } from 'zod'
 const prisma = new PrismaClient()
 export const appRouter = trpc
    .router()
