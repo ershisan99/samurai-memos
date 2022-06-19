@@ -24,9 +24,9 @@ export default withTRPC<AppRouter>({
        * If you want to use SSR, you need to use the server's full URL
        * @link https://trpc.io/docs/ssr
        */
-      console.log(process.env.DEPLOY_URL)
-      const url = process.env.DEPLOY_URL
-         ? `${process.env.DEPLOY_URL}/api/trpc`
+      console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
+      const url = process.env.NEXT_PUBLIC_VERCEL_URL
+         ? `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/trpc`
          : 'http://localhost:3000/api/trpc'
 
       return {
