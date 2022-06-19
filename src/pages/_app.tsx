@@ -26,7 +26,7 @@ export default withTRPC<AppRouter>({
        */
       console.log(process.env.DEPLOY_URL)
       const url = process.env.DEPLOY_URL
-         ? `${process.env.VERCEL_URL}/api/trpc`
+         ? `${process.env.DEPLOY_URL}/api/trpc`
          : 'http://localhost:3000/api/trpc'
 
       return {
