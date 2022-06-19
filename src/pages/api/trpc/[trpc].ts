@@ -9,7 +9,17 @@ export const appRouter = createRouter()
    .query('getAllPosts', {
       async resolve({ ctx }) {
          console.log(ctx)
-         return await prisma.post.findMany()
+         return await prisma.post.findMany({
+            include: {
+               author: {
+                  select: {
+                     name: true,
+                     email: true,
+                     image: true,
+                  },
+               },
+            },
+         })
       },
    })
    .mutation('createPost', {
