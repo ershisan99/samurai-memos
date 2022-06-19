@@ -22,6 +22,7 @@ export const RenderHtml: FC<PropsType> = ({ html, title }) => {
             node instanceof Element &&
             node.type === 'tag' &&
             node.name === 'code' &&
+            node.children[0] &&
             isText(node.children[0])
          ) {
             return (
@@ -37,7 +38,7 @@ export const RenderHtml: FC<PropsType> = ({ html, title }) => {
    return (
       <>
          <h1>{title}</h1>
-         {parsed}
+         <div className="prose">{parsed}</div>
       </>
    )
 }

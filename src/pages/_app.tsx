@@ -5,6 +5,8 @@ import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import superjson from 'superjson'
 import '../styles/globals.css'
+import '@/components/editor/MenuItem.css'
+import '@/components/editor/MenuBar.css'
 import { AppRouter } from './api/trpc/[trpc]'
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
    return (
