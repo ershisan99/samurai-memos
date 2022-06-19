@@ -7,9 +7,10 @@ import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 type PropsType = {
    html: string
+   title: string
 }
 
-export const RenderHtml: FC<PropsType> = ({ html }) => {
+export const RenderHtml: FC<PropsType> = ({ html, title }) => {
    const removedPre = html
       .replace(/<pre>/g, '')
       .replace(/<\/pre>/g, '')
@@ -33,5 +34,10 @@ export const RenderHtml: FC<PropsType> = ({ html }) => {
          }
       },
    })
-   return <>{parsed}</>
+   return (
+      <>
+         <h1>{title}</h1>
+         {parsed}
+      </>
+   )
 }
