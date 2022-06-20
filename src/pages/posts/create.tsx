@@ -6,7 +6,7 @@ import ContentEditable from 'react-contenteditable'
 import slugify from 'react-slugify'
 
 const CreatePost: NextPage = () => {
-   const { mutate } = trpc.useMutation(['post.createPost'])
+   const { mutate } = trpc.useMutation(['post.createOne'])
    const [htmlContent, setHtmlContent] = useState('')
    const [title, setTitle] = useState('Post title')
    const [categoryId, setCategoryId] = useState(-1)

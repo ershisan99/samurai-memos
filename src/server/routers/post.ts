@@ -5,7 +5,7 @@ import { createRouter } from '../createRouter'
 
 const prisma = new PrismaClient()
 export const postRouter = createRouter()
-   .query('getAllPosts', {
+   .query('getAll', {
       async resolve({ ctx }) {
          console.log(ctx)
          return await prisma.post.findMany({
@@ -27,7 +27,7 @@ export const postRouter = createRouter()
          })
       },
    })
-   .mutation('createPost', {
+   .mutation('createOne', {
       input: z.object({
          title: z.string().min(5).max(100),
          content: z.string().min(5).max(10000),
