@@ -18,6 +18,12 @@ export const appRouter = createRouter()
                      image: true,
                   },
                },
+               category: {
+                  select: {
+                     name: true,
+                     id: true,
+                  },
+               },
             },
          })
       },
@@ -34,6 +40,7 @@ export const appRouter = createRouter()
             'REJECTED',
          ]),
          slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/gm),
+         categoryId: z.number().min(0),
       }),
       async resolve({ input, ctx }) {
          if (!ctx.session?.userId) {
@@ -47,6 +54,11 @@ export const appRouter = createRouter()
                published: false,
                status: input.status,
                slug: input.slug,
+               category: {
+                  connect: {
+                     id: input.categoryId,
+                  },
+               },
             },
          })
       },

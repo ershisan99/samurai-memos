@@ -70,11 +70,12 @@ model Post {
   published  Boolean    @default(false)
   author     User       @relation(fields: [authorId], references: [id])
   authorId   String
-  categories Category[] @relation(references: [id])
+  category   Category   @relation(fields: [categoryId], references: [id])
   status     Status     @default(DRAFT)
   slug       String     @unique
   likes      Like[]
   favorites  Favorite[]
+  categoryId Int        @default(0)
 }
 
 model Like {
@@ -96,7 +97,9 @@ model Favorite {
 model Category {
   id    Int    @id @default(autoincrement())
   name  String
-  posts Post[] @relation(references: [id])
+  posts Post[]
+
+  @@unique([name, id])
 }
 
 enum Role {

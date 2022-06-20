@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ReactNode } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import Loader from './loader/Loader'
@@ -209,10 +210,10 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
             <aside className="bg-base-200 w-80">
                <ul className="menu p-4 overflow-y-auto text-base-content">
                   <li>
-                     <a>Sidebar Item 1</a>
+                     <Link href="/posts">Posts</Link>
                   </li>
                   <li>
-                     <a>Sidebar Item 2</a>
+                     <Link href="/posts/create">Create post</Link>
                   </li>
                </ul>
             </aside>

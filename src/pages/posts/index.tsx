@@ -2,7 +2,7 @@ import { RenderHtml } from '@/components/RenderHtml'
 import { trpc } from '@/utils/trpc'
 import type { NextPage } from 'next'
 
-const Home: NextPage = () => {
+const Posts: NextPage = () => {
    const { data, isLoading } = trpc.useQuery(['getAllPosts'])
 
    if (isLoading || !data) return <p>Loading...</p>
@@ -28,4 +28,4 @@ const Home: NextPage = () => {
    )
 }
 
-export default Home
+export default Posts
