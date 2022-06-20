@@ -1,4 +1,5 @@
 import Editor from '@/components/editor/Editor'
+import Loader from '@/components/loader/Loader'
 import { trpc } from '@/utils/trpc'
 import { NextPage } from 'next'
 import { useRef, useState } from 'react'
@@ -6,7 +7,14 @@ import ContentEditable from 'react-contenteditable'
 import slugify from 'react-slugify'
 
 const CreatePost: NextPage = () => {
-   const { mutate } = trpc.useMutation(['post.createOne'])
+   const { data: categories, isLoading: categoriesLoading } = trpc.useQuery([
+      'category.getAll',
+   ])
+   const { mutate } = trpc.useMutation(['post.createOne'], {
+      onSuccess: () => {
+         alert('Success!')
+      },
+   })
    const [htmlContent, setHtmlContent] = useState('')
    const [title, setTitle] = useState('Post title')
    const [categoryId, setCategoryId] = useState(-1)
@@ -22,19 +30,27 @@ const CreatePost: NextPage = () => {
                onChange={(e) => setTitle(e.target.value)}
                tagName="h1"
             />
-            <select
-               required
-               className="select select-primary max-w-content"
-               value={categoryId}
-               onChange={(e) => setCategoryId(Number(e.target.value))}
-            >
-               <option disabled value={-1}>
-                  Select a category
-               </option>
-               <option value={0}>React</option>
-               <option value={1}>Js</option>
-               <option value={2}>Other</option>
-            </select>
+            {categoriesLoading ? (
+               <Loader />
+            ) : (
+               <select
+                  required
+                  className="select select-primary max-w-content"
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(Number(e.target.value))}
+               >
+                  <option disabled value={-1}>
+                     Select a category
+                  </option>
+                  {categories?.map((category) => {
+                     return (
+                        <option key={category.id} value={category.id}>
+                           {category.name}
+                        </option>
+                     )
+                  })}
+               </select>
+            )}
          </div>
          <Editor htmlContent={htmlContent} setHtmlContent={setHtmlContent} />
          <div className="flex w-full justify-end">

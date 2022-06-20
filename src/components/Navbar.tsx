@@ -215,6 +215,9 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
                   <li>
                      <Link href="/posts/create">Create post</Link>
                   </li>
+                  <li>
+                     <Link href="/admin">Admin</Link>
+                  </li>
                </ul>
             </aside>
          </div>
