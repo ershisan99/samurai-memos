@@ -37,7 +37,7 @@ export const RenderHtml: FC<PropsType> = ({ html, title }) => {
    })
    return (
       <>
-         <h1>{title}</h1>
+         <h1>{parse(title)}</h1>
          <div className="prose">{parsed}</div>
       </>
    )
