@@ -7,8 +7,8 @@ import { postRouter } from './post'
 import superjson from 'superjson'
 
 export const appRouter = createRouter()
-   .transformer(superjson)
-   .merge('post.', postRouter)
-   .merge('category.', categoryRouter)
+    .transformer(superjson)
+    .merge('post.', postRouter)
+    .merge('category.', categoryRouter)
 
 export type AppRouter = typeof appRouter

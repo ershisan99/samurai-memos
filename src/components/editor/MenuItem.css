@@ -1,22 +1,22 @@
 .menu-item {
-   background-color: transparent;
-   border: none;
-   border-radius: 0.4rem;
-   height: 1.75rem;
-   margin-right: 0.25rem;
-   padding: 0.25rem;
-   width: 1.75rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0.4rem;
+    height: 1.75rem;
+    margin-right: 0.25rem;
+    padding: 0.25rem;
+    width: 1.75rem;
 }
 .menu-item:hover,
 .is-active {
-   background-color: hsl(var(--p));
+    background-color: hsl(var(--p));
 }
 .menu-item:hover > svg,
 .is-active > svg {
-   fill: hsl(var(--pc));
+    fill: hsl(var(--pc));
 }
 
 .menu-item svg {
-   height: 100%;
-   width: 100%;
+    height: 100%;
+    width: 100%;
 }
