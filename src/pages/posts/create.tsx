@@ -22,7 +22,7 @@ const CreatePost: NextPage = () => {
     //todo: add loaders
 
     return (
-        <div className="prose p-6 max-w-full">
+        <div className="prose max-w-full p-6">
             <div className="flex justify-between">
                 <ContentEditable
                     className="focus:outline-none"
@@ -35,7 +35,7 @@ const CreatePost: NextPage = () => {
                 ) : (
                     <select
                         required
-                        className="select select-primary max-w-content"
+                        className="max-w-content select select-primary"
                         value={categoryId}
                         onChange={(e) => setCategoryId(Number(e.target.value))}
                     >
@@ -55,7 +55,7 @@ const CreatePost: NextPage = () => {
             <Editor htmlContent={htmlContent} setHtmlContent={setHtmlContent} />
             <div className="flex w-full justify-end">
                 <button
-                    className="btn btn-primary mt-4 align-self-end "
+                    className="align-self-end btn btn-primary mt-4 "
                     onClick={() =>
                         mutate({
                             title: title,
