@@ -10,14 +10,14 @@ const ThemeItem = ({ name }: { name: string }) => {
     const { theme, setTheme } = useTheme()
     return (
         <div
-            className={`outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2 ${
+            className={`overflow-hidden rounded-lg outline-2 outline-offset-2 outline-base-content ${
                 theme === name ? 'outline' : ''
             }`}
         >
             <div
                 onClick={() => setTheme(name)}
                 data-theme={name}
-                className="bg-base-100 text-base-content w-full cursor-pointer font-sans"
+                className="w-full cursor-pointer bg-base-100 font-sans text-base-content"
             >
                 <div className="grid grid-cols-5 grid-rows-3">
                     <div className="col-span-5 row-span-3 row-start-1 flex gap-1 py-3 px-4">
@@ -25,10 +25,10 @@ const ThemeItem = ({ name }: { name: string }) => {
                             {name}
                         </div>
                         <div className="flex flex-shrink-0 flex-wrap gap-1">
-                            <div className="bg-primary w-2 rounded"></div>
-                            <div className="bg-secondary w-2 rounded"></div>
-                            <div className="bg-accent w-2 rounded"></div>
-                            <div className="bg-neutral w-2 rounded"></div>
+                            <div className="w-2 rounded bg-primary"></div>
+                            <div className="w-2 rounded bg-secondary"></div>
+                            <div className="w-2 rounded bg-accent"></div>
+                            <div className="w-2 rounded bg-neutral"></div>
                         </div>
                     </div>
                 </div>
@@ -39,8 +39,8 @@ const ThemeItem = ({ name }: { name: string }) => {
 
 const SelectTheme = () => {
     return (
-        <div className="dropdown dropdown-end">
-            <div tabIndex={0} className="btn gap-1 normal-case btn-ghost">
+        <div className="dropdown-end dropdown">
+            <div tabIndex={0} className="btn btn-ghost gap-1 normal-case">
                 <svg
                     width="20"
                     height="20"
@@ -69,7 +69,7 @@ const SelectTheme = () => {
             </div>
             <div
                 tabIndex={0}
-                className="dropdown-content bg-base-200 text-base-content rounded-t-box rounded-b-box top-px max-h-96 h-[70vh] w-52 overflow-y-auto shadow-2xl mt-16"
+                className="dropdown-content rounded-t-box rounded-b-box top-px mt-16 h-[70vh] max-h-96 w-52 overflow-y-auto bg-base-200 text-base-content shadow-2xl"
             >
                 <div className="grid grid-cols-1 gap-3 p-3">
                     {[
@@ -119,10 +119,10 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
         !isLoading && isAuth ? signOut() : signIn()
     }
     return (
-        <div className="drawer drawer-mobile bg-base-100">
+        <div className="drawer-mobile drawer bg-base-100">
             <input id="drawer" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
-                <nav className="navbar sticky top-0 z-30 h-16 w-full bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content">
+                <nav className="navbar sticky top-0 z-30 h-16 w-full bg-base-100 bg-opacity-90 text-base-content backdrop-blur transition-all duration-100">
                     <div className="flex-1">
                         <span
                             className="tooltip tooltip-bottom before:text-xs before:content-[attr(data-tip)]"
@@ -153,7 +153,7 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
                             />
                         </div>
                         <SelectTheme />
-                        <div className="dropdown dropdown-end">
+                        <div className="dropdown-end dropdown">
                             <label
                                 tabIndex={0}
                                 className="btn btn-ghost btn-circle"
@@ -163,7 +163,7 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
                                         <Loader />
                                     ) : session?.user?.image ? (
                                         <Image
-                                            className="w-10 rounded-full avatar"
+                                            className="avatar w-10 rounded-full"
                                             src={session.user.image}
                                             alt="profile"
                                             layout="fill"
@@ -178,7 +178,7 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
                             </label>
                             <ul
                                 tabIndex={0}
-                                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+                                className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
                             >
                                 <li>
                                     <a className="justify-between">
@@ -202,17 +202,17 @@ export const Navbar = ({ children }: { children: ReactNode }) => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="drawer" className="drawer-overlay"></label>
-                <aside className="bg-base-200 w-80">
-                    <div className="flex z-20 bg-base-200 bg-opacity-90 backdrop-blur sticky top-0 items-center gap-2 px-4 py-2">
+                <aside className="w-80 bg-base-200">
+                    <div className="sticky top-0 z-20 flex items-center gap-2 bg-base-200 bg-opacity-90 px-4 py-2 backdrop-blur">
                         <Link href={'/'}>
                             <a className="flex-0 btn btn-ghost px-3 normal-case">
-                                <div className="text-primary inline-flex transition-all duration-200 text-3xl">
+                                <div className="inline-flex text-3xl text-primary transition-all duration-200">
                                     Samurai Memos
                                 </div>
                             </a>
                         </Link>
                     </div>
-                    <ul className="menu p-4 overflow-y-auto text-base-content">
+                    <ul className="menu overflow-y-auto p-4 text-base-content">
                         <li>
                             <Link href="/posts">Posts</Link>
                         </li>

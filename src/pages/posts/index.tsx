@@ -14,21 +14,23 @@ const Posts: NextPage = () => {
         )
 
     return (
-        <div className="p-10 prose">
-            {data.map((post) => {
-                return (
-                    <div key={post.id} className="mb-16">
-                        <RenderHtml
-                            html={post.content}
-                            title={post.title}
-                            slug={post.slug}
-                        />
-                        <p>status: {post.status}</p>
-                        <p>created: {post.createdAt?.toLocaleString()}</p>
-                        <p>category: {post.category.name}</p>
-                    </div>
-                )
-            })}
+        <div className="flex justify-center">
+            <div className="prose p-10">
+                {data.map((post) => {
+                    return (
+                        <div key={post.id} className="mb-16">
+                            <RenderHtml
+                                html={post.content}
+                                title={post.title}
+                                slug={post.slug}
+                            />
+                            <p>status: {post.status}</p>
+                            <p>created: {post.createdAt?.toLocaleString()}</p>
+                            <p>category: {post.category.name}</p>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
