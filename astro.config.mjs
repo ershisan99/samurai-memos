@@ -1,5 +1,7 @@
-import { defineConfig } from 'astro/config';
-import NetlifyCMS from 'astro-netlify-cms';
+import { defineConfig } from 'astro/config'
+import NetlifyCMS from 'astro-netlify-cms'
+
+import tailwind from '@astrojs/tailwind'
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,7 +26,11 @@ export default defineConfig({
             create: true,
             delete: true,
             fields: [
-              { name: 'title', widget: 'string', label: 'Post Title' },
+              {
+                name: 'title',
+                widget: 'string',
+                label: 'Post Title',
+              },
               {
                 name: 'publishDate',
                 widget: 'datetime',
@@ -33,16 +39,38 @@ export default defineConfig({
                 time_format: false,
                 label: 'Publish Date',
               },
-              { name: 'author', widget: 'string', label: 'Author Name', required: false },
-              { name: 'authorURL', widget: 'string', label: 'Author URL', required: false },
-              { name: 'description', widget: 'string', label: 'Description', required: false },
-              { name: 'body', widget: 'markdown', label: 'Post Body' },
+              {
+                name: 'author',
+                widget: 'string',
+                label: 'Author Name',
+                required: false,
+              },
+              {
+                name: 'authorURL',
+                widget: 'string',
+                label: 'Author URL',
+                required: false,
+              },
+              {
+                name: 'description',
+                widget: 'string',
+                label: 'Description',
+                required: false,
+              },
+              {
+                name: 'body',
+                widget: 'markdown',
+                label: 'Post Body',
+              },
               {
                 name: 'layout',
                 widget: 'select',
                 default: '../../layouts/BlogPost.astro',
                 options: [
-                  { label: 'Blog Post', value: '../../layouts/BlogPost.astro' },
+                  {
+                    label: 'Blog Post',
+                    value: '../../layouts/BlogPost.astro',
+                  },
                 ],
               },
             ],
@@ -51,5 +79,6 @@ export default defineConfig({
       },
       previewStyles: ['src/styles/blog.css'],
     }),
+    tailwind(),
   ],
-});
+})
