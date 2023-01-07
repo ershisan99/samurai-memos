@@ -1,3 +1,3 @@
 export const SITE = {
-  title: 'Памятка Самурая',
-}
+  title: "Памятка Самурая",
+};
