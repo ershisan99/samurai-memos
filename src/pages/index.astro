@@ -15,8 +15,8 @@ let permalink = "https://example.com/";
 let allPosts = await Astro.glob("./posts/*.md");
 allPosts = allPosts.sort(
   (a, b) =>
-    new Date(b.frontmatter.publishDate).valueOf() -
-    new Date(a.frontmatter.publishDate).valueOf()
+    new Date(a.frontmatter.publishDate).valueOf() -
+    new Date(b.frontmatter.publishDate).valueOf()
 );
 ---
 
