@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import BlogHeader from "../components/BlogHeader.astro";
 import BlogPost from "../components/BlogPost.astro";
+import BodyContainer from "../components/BodyContainer.astro";
 
 const { content } = Astro.props;
 const {
@@ -21,12 +22,12 @@ const {
     <BaseHead {title} {description} {permalink} />
   </head>
 
-  <body>
+  <BodyContainer>
     <BlogHeader />
     <div class="wrapper">
       <BlogPost {title} {author} {authorURL} {heroImage} {publishDate} {alt}>
         <slot />
       </BlogPost>
     </div>
-  </body>
+  </BodyContainer>
 </html>

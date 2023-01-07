@@ -4,11 +4,8 @@ import BaseHead from "../components/BaseHead.astro";
 import BlogHeader from "../components/BlogHeader.astro";
 import BlogPostPreview from "../components/BlogPostPreview.astro";
 import { SITE } from "../config";
+import BodyContainer from "../components/BodyContainer.astro";
 
-// Component Script:
-// You can write any JavaScript/TypeScript that you'd like here.
-// It will run during the build, but never in the browser.
-// All variables are available to use in the HTML template below.
 let { title } = SITE;
 let description = "Коллективная памятка студентов IT-Incubator";
 let permalink = "https://example.com/";
@@ -23,26 +20,20 @@ allPosts = allPosts.sort(
 );
 ---
 
-<html lang="ru">
+<html lang="ru" class="min-h-screen h-full">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
   </head>
 
-  <body class="container mx-auto px-4 max-w-screen-md">
+  <BodyContainer>
     <BlogHeader />
-    <div class="wrapper">
-      <main class="content">
-        <section class="intro">
-          <h1 class="latest">{title}</h1>
-          <p>{description}</p>
-        </section>
-        <section aria-label="Blog post list">
-          {allPosts.map((p) => <BlogPostPreview post={p} />)}
-        </section>
-      </main>
-      <footer>
-        <a href="/admin">Admin Dashboard 🔐</a>
-      </footer>
-    </div>
-  </body>
+    <main class="content justify-self-start">
+      <section aria-label="Blog post list" class="flex flex-col gap-20">
+        {allPosts.map((p) => <BlogPostPreview post={p} />)}
+      </section>
+    </main>
+    <footer class="flex items-center justify-center h-20 mt-10">
+      <a href="/admin">Admin Dashboard 🔐</a>
+    </footer>
+  </BodyContainer>
 </html>
