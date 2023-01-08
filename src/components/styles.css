@@ -1,0 +1,38 @@
+:root {
+  --theme-sidebar-right-width: 18rem;
+  --theme-sidebar-left-width: 18rem;
+  --theme-navbar-height: 3rem;
+  --theme-divider: #e5e5e5;
+}
+
+.toc-post {
+  width: var(--theme-sidebar-left-width);
+  position: fixed;
+  right: 0;
+}
+
+.toc-post .toc-level .toc-link {
+  padding-inline-start: 1rem;
+}
+
+.toc-post .toc-level-2 .toc-link {
+  padding-inline-start: 2rem;
+}
+
+.toc-post .toc-level-3 .toc-link {
+  padding-inline-start: 3rem;
+}
+
+li.toc-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.toc-link {
+  border-inline-start: 4px solid var(--theme-divider);
+}
+
+.main-content {
+  margin-inline-start: var(--theme-sidebar-left-width);
+  margin-inline-end: var(--theme-sidebar-right-width);
+}

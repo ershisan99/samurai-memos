@@ -20,7 +20,7 @@ allPosts = allPosts.sort(
 );
 ---
 
-<html lang="ru" class="min-h-screen h-full">
+<html lang="ru" class="h-full min-h-screen">
   <head>
     <BaseHead title={title} description={description} permalink={permalink} />
   </head>
@@ -32,7 +32,7 @@ allPosts = allPosts.sort(
         {allPosts.map((p) => <BlogPostPreview post={p} />)}
       </section>
     </main>
-    <footer class="flex items-center justify-center h-20 mt-10">
+    <footer class="mt-10 flex h-20 items-center justify-center">
       <a href="/admin">Admin Dashboard 🔐</a>
     </footer>
   </BodyContainer>

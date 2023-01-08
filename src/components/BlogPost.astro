@@ -13,16 +13,25 @@ const { title, author, authorURL, publishDate, alt } = Astro.props as Props;
 ---
 
 <div class="layout">
-  <article class="content">
-    <div>
-      <header class="mb-10">
-        <p class="text-sm mb-2">{publishDate}</p>
-        <h1 class="font-bold text-5xl mb-2">{title}</h1>
-        <Author name={author} href={authorURL} />
-      </header>
-      <main class="prose dark:prose-invert max-w-none">
-        <slot />
-      </main>
+  <article class="content-container">
+    <div class="main-content flex justify-center">
+      <div class="prose dark:prose-invert">
+        <header class="mb-10">
+          <h1 class="mb-2 text-5xl font-bold">{title}</h1>
+          <Author name={author} href={authorURL} />
+        </header>
+        <main class="prose dark:prose-invert">
+          <slot />
+        </main>
+      </div>
     </div>
   </article>
 </div>
+
+<script>
+  const moveTocTo = document.querySelector(".content-container");
+  const toc = document.querySelector(".toc-post");
+  if (toc && moveTocTo) {
+    moveTocTo.prepend(toc);
+  }
+</script>
