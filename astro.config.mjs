@@ -1,10 +1,11 @@
 import { defineConfig } from "astro/config";
 import NetlifyCMS from "astro-netlify-cms";
-
+import markdownConfig from "./markdown.config";
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  markdown: markdownConfig,
   integrations: [
     NetlifyCMS({
       config: {
