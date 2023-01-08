@@ -1,31 +1,50 @@
 ---
 import Author from "./Author.astro";
-
+import TableOfContents from "./TableOfContents/TableOfContents";
+import generateToc from "../util/generateToc";
 export interface Props {
   title: string;
   author: string;
   authorURL: string;
   publishDate: string;
   alt: string;
+  headings: any;
 }
 
-const { title, author, authorURL, publishDate, alt } = Astro.props as Props;
+const { title, author, authorURL, publishDate, alt, headings } =
+  Astro.props as Props;
 ---
 
 <div class="layout">
-  <article class="content-container">
+  <main class="content-container">
+    {
+      headings && (
+        <aside>
+          <nav class="toc-post">
+            <TableOfContents
+              client:media="(min-width: 72em)"
+              toc={generateToc(headings, "Вступление")}
+              labels={{
+                onThisPage: "Содержание",
+              }}
+              isMobile={false}
+            />
+          </nav>
+        </aside>
+      )
+    }
     <div class="main-content flex justify-center">
       <div class="prose dark:prose-invert">
-        <header class="mb-10">
-          <h1 class="mb-2 text-5xl font-bold">{title}</h1>
+        <header class="mb-10" id="overview">
+          <h1 class="mb-2 text-5xl font-bold" id="overview">{title}</h1>
           <Author name={author} href={authorURL} />
         </header>
-        <main class="prose dark:prose-invert">
+        <article class="prose dark:prose-invert">
           <slot />
-        </main>
+        </article>
       </div>
     </div>
-  </article>
+  </main>
 </div>
 
 <script>
@@ -34,4 +53,33 @@ const { title, author, authorURL, publishDate, alt } = Astro.props as Props;
   if (toc && moveTocTo) {
     moveTocTo.prepend(toc);
   }
+  // const observer = new IntersectionObserver(
+  //   (entries) => {
+  //     entries.forEach((entry) => {
+  //       if (entry.isIntersecting) {
+  //         entry.target.classList.add("active");
+  //       } else {
+  //         entry.target.classList.remove("active");
+  //       }
+  //     });
+  //   },
+  //   { threshold: 0.5 }
+  // );
+  // observer.observe(document.querySelector(".toc-post"));
+  // const links = document.querySelectorAll("a.toc-link");
+
+  // updateLinks();
+  // window.addEventListener("hashchange", updateLinks);
+
+  // function updateLinks() {
+  //   // add active class to toc link if it's the current page
+
+  //   links.forEach((link: HTMLAnchorElement) => {
+  //     if (link.hash === window.location.hash) {
+  //       link.classList.add("active");
+  //       return;
+  //     }
+  //     link.classList.remove("active");
+  //   });
+  // }
 </script>

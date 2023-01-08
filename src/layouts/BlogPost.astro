@@ -3,8 +3,9 @@ import BaseHead from "../components/BaseHead.astro";
 import BlogHeader from "../components/BlogHeader.astro";
 import BlogPost from "../components/BlogPost.astro";
 import BodyContainer from "../components/BodyContainer.astro";
-
-const { content } = Astro.props;
+import TableOfContents from "../components/TableOfContents/TableOfContents";
+import generateToc from "../util/generateToc";
+const { content, headings } = Astro.props;
 const {
   title,
   description,
@@ -25,7 +26,15 @@ const {
   <BodyContainer>
     <BlogHeader />
     <div class="wrapper">
-      <BlogPost {title} {author} {authorURL} {heroImage} {publishDate} {alt}>
+      <BlogPost
+        {title}
+        {author}
+        {authorURL}
+        {heroImage}
+        {publishDate}
+        {alt}
+        {headings}
+      >
         <slot />
       </BlogPost>
     </div>
